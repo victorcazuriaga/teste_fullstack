@@ -3,6 +3,7 @@ name: Vercel Production Deployment
 env:
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    SHELL: /bin/bash
 
 on:
     push:
@@ -18,6 +19,9 @@ jobs:
 
             - name: Install pnpm
               run: npm install -g pnpm
+            
+            - name: Set up pnpm global bin directory
+              run: pnpm setup
 
             - name: Install Vercel CLI
               run: pnpm add -g vercel
